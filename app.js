@@ -7,6 +7,7 @@ var configs = require('./configs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var apiRouter = require('./routes/api');
 
 var mysql = require('mysql'), // node-mysql module
 dbConnection = require('express-myconnection'), // express-myconnection module
@@ -34,6 +35,7 @@ app.use(dbConnection(mysql, dbOptions, 'pool'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api',apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

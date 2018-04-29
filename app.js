@@ -3,9 +3,20 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var configs = require('./configs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+var mysql = require('mysql'), // node-mysql module
+dbConnection = require('express-myconnection'), // express-myconnection module
+  dbOptions = {
+    host: configs.DB_HOST,
+    user: configs.DB_USER,
+    password: configs.DB_PASS,
+    port: configs.DB_PORT,
+    database: configs.DB_DATABASE
+  };
 
 var app = express();
 
@@ -18,6 +29,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(dbConnection(mysql, dbOptions, 'pool'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

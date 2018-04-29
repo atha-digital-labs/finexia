@@ -3,5 +3,6 @@ module.exports={
   DB_PORT:3306,
   DB_USER:'nse.service',
   DB_PASS:'pass1234',
-  DB_DATABASE:'finexia'
+  DB_DATABASE:'finexia',
+  NEW_KEY:'NEW_VALUE'
 }
